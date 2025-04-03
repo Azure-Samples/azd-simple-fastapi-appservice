@@ -1,0 +1,23 @@
+name: Template Validation
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '0 0 * * 1'  # Run weekly on Mondays
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install azd
+        uses: Azure/setup-azd@v0.1.0
+
+      - name: Validate Template
+        run: |
+          azd config set auth.useLocalCreds true
+          azd validate .
