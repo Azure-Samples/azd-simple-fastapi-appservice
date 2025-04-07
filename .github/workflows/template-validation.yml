@@ -20,4 +20,5 @@ jobs:
       - name: Validate Template
         run: |
           azd config set auth.useLocalCreds true
-          azd validate .
+          # Attempt to initialize the template which will validate its structure
+          azd init
